@@ -7,8 +7,20 @@ import tw from 'twrnc';
 import color from '../config/color';
 import Create from '../screens/Create';
 import CreateBtn from '../components/CreateBtn';
+import {useFocusEffect} from '@react-navigation/native';
+import DetailNavigator from './DetailNavigator';
+import SDetailNavigator from './SDetailNavigator';
 
 const HomeNavigator = () => {
+  const [showAlert, setShowAlert] = useState(false);
+  useFocusEffect(
+    React.useCallback(() => {
+      setShowAlert(false);
+      console.log('callback');
+      // Reset focus when returning to the nested Tab Navigator
+      // You might need to replace 'home' with the correct screen name
+    }, []),
+  );
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
@@ -71,7 +83,7 @@ const HomeNavigator = () => {
           ),
         }}
         name="member"
-        component={Member}
+        component={DetailNavigator}
       />
       <Tab.Screen
         options={{
@@ -86,7 +98,9 @@ const HomeNavigator = () => {
               }}
             />
           ),
-          tabBarButton: _ => <CreateBtn  />,
+          tabBarButton: _ => (
+            <CreateBtn showAlert={showAlert} setShowAlert={setShowAlert} />
+          ),
           // tabBarButton: props => <CreateButton {...props} />,
         }}
         name="create"
@@ -96,12 +110,13 @@ const HomeNavigator = () => {
         options={{
           title: 'Staff Card Management',
           headerStyle: {
-            elevation: 0,
             backgroundColor: color.tabBg,
             height: 70,
+            elevation: 0,
           },
+
           headerTitleAlign: 'center',
-          headerTintColor: color.activeColor,
+          headerTintColor: color.blue,
           headerTitleStyle: {
             letterSpacing: 2,
             fontSize: 25,
@@ -129,7 +144,7 @@ const HomeNavigator = () => {
           ),
         }}
         name="staff"
-        component={Staff}
+        component={SDetailNavigator}
       />
     </Tab.Navigator>
   );

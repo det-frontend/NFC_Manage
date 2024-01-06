@@ -3,7 +3,7 @@ import {View, Text, Modal, TouchableOpacity, Image} from 'react-native';
 import tw from 'twrnc';
 import {useNavigation} from '@react-navigation/native';
 // import {AntDesign} from '@expo/vector-icons';
-const ModalAlert = ({visible, onClose, onOk, text}) => {
+const ModalAlert = ({visible, onClose, setShowAlert, onOk, text}) => {
   const navigation = useNavigation();
   return (
     <Modal visible={visible} transparent animationType="fade">
@@ -22,7 +22,9 @@ const ModalAlert = ({visible, onClose, onOk, text}) => {
 
           <View style={tw`flex flex-row gap-5 items-center`}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('memberCreate')}
+              onPress={() => {
+                navigation.navigate('memberCreate'), setShowAlert(false);
+              }}
               style={tw`p-2 w-[190px] h-[190px] rounded-lg flex items-center justify-center py-4 border-2 border-[#52a950] bg-[#52a95020]`}>
               {/* <Text style={tw`text-white  text-center text-gray-600  text-lg`}> 
                 Cancel
@@ -37,8 +39,10 @@ const ModalAlert = ({visible, onClose, onOk, text}) => {
               />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigation.navigate('staffCreate')}
-              style={tw`p-2 w-[190px] h-[190px] rounded-lg flex items-center justify-center py-4 border-2 border-[#52a950] bg-[#52a95020]`}>
+              onPress={() => {
+                navigation.navigate('staffCreate'), setShowAlert(false);
+              }}
+              style={tw`p-2 w-[190px] h-[190px] rounded-lg flex items-center justify-center py-4 border-2 border-[#0091F7] bg-[#0091F720]`}>
               {/* <Text style={tw`text-white text-center text-lg`}>Sure</Text> */}
               <Image
                 source={require('../assets/staff.png')}

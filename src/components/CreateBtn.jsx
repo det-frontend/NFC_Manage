@@ -3,9 +3,10 @@ import React, {useState} from 'react';
 import tw from 'twrnc';
 import ModalAlert from './ModalAlert';
 
-const CreateBtn = ({navigation}) => {
-  const [showAlert, setShowAlert] = useState(false);
-
+const CreateBtn = ({navigation, showAlert, setShowAlert}) => {
+  console.log('===modal=================================');
+  console.log(showAlert);
+  console.log('====================================');
   const handleOk = () => {
     // Handle 'Ok' button press logic here
     setShowAlert(false);
@@ -15,6 +16,7 @@ const CreateBtn = ({navigation}) => {
     // Handle 'Cancel' button press logic here
     setShowAlert(false);
   };
+
   return (
     <>
       <TouchableOpacity
@@ -36,6 +38,7 @@ const CreateBtn = ({navigation}) => {
       <ModalAlert
         text="Logout your account"
         visible={showAlert}
+        setShowAlert={setShowAlert}
         onOk={handleOk}
         onClose={handleClose}
       />

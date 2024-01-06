@@ -4,19 +4,11 @@ import HomeNavigator from './HomeNavigator';
 import {createStackNavigator} from '@react-navigation/stack';
 import Member from './Member';
 import Staff from './Staff';
-import {useFocusEffect} from '@react-navigation/native';
-import {useNavigation} from '@react-navigation/native';
+import color from '../config/color';
 
 const StackNavigator = () => {
   const Stack = createStackNavigator();
-  const navigation = useNavigation();
-  useFocusEffect(
-    React.useCallback(() => {
-      // Reset focus when returning to the nested Tab Navigator
-      // You might need to replace 'home' with the correct screen name
-      navigation.navigate('home');
-    }, []),
-  );
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -24,8 +16,32 @@ const StackNavigator = () => {
         component={HomeNavigator}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="memberCreate" component={Member} />
-      <Stack.Screen name="staffCreate" component={Staff} />
+      <Stack.Screen
+        options={{
+          title: 'Back to home',
+          headerStyle: {
+            elevation: 0,
+            backgroundColor: color.tabBg,
+            height: 70,
+          },
+          headerTintColor: color.activeColor,
+        }}
+        name="memberCreate"
+        component={Member}
+      />
+      <Stack.Screen
+        options={{
+          title: 'Back to home',
+          headerStyle: {
+            elevation: 0,
+            backgroundColor: color.tabBg,
+            height: 70,
+          },
+          headerTintColor: color.blue,
+        }}
+        name="staffCreate"
+        component={Staff}
+      />
     </Stack.Navigator>
   );
 };

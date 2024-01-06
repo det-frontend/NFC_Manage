@@ -14,6 +14,7 @@ const Member = () => {
           height: 80,
           backgroundColor: color.tabBg,
         },
+
         headerTintColor: color.light,
       }}>
       <Stack.Screen
