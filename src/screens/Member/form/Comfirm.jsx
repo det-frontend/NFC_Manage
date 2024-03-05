@@ -20,6 +20,7 @@ const Comfirm = ({route}) => {
   const pressHandler = () => {
     setAni(prev => !prev);
   };
+  
   useEffect(() => {
     ani ? readNfc() : NfcManager.cancelTechnologyRequest();
   }, [ani]);
@@ -96,6 +97,7 @@ const Comfirm = ({route}) => {
             }}>
             {/* <View style={tw`absolute top-0 right-0 left-0`}> */}
             <Scan
+                color="#52a950"
               ani={ani}
               text={ani ? 'STOP' : 'SCAN'}
               onPress={pressHandler}

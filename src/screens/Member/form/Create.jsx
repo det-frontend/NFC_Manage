@@ -20,6 +20,7 @@ const Create = () => {
     console.log('====================================');
     navigation.navigate('mComfirm', values);
   };
+  
   return (
     <Screen>
       <View style={tw` w-[95%] mx-auto`}>
@@ -93,13 +94,13 @@ const Create = () => {
                   </Text>
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity
-                // onPress={() => navigation.navigate('mComfirm')}
-                onPress={() => navigation.navigate('mComfirm')}
-                title="Submit"
-                style={tw`p-2 px-10 w-[48%] rounded-lg flex bg-[#52a950] items-center justify-center py-4 border-2 border-[#52a950] `}>
-                <Text style={tw`text-gray-800  text-center text-xl`}>Next</Text>
-              </TouchableOpacity>
+              {/*<TouchableOpacity*/}
+              {/*  // onPress={() => navigation.navigate('mComfirm')}*/}
+              {/*  onPress={() => navigation.navigate('mComfirm')}*/}
+              {/*  title="Submit"*/}
+              {/*  style={tw`p-2 px-10 w-[48%] rounded-lg flex bg-[#52a950] items-center justify-center py-4 border-2 border-[#52a950] `}>*/}
+              {/*  <Text style={tw`text-gray-800  text-center text-xl`}>Next</Text>*/}
+              {/*</TouchableOpacity>*/}
             </View>
           )}
         </Formik>

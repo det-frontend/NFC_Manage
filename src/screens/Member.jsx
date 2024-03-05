@@ -19,7 +19,9 @@ const Member = ({navigation}) => {
 
   const getMember = async id => {
     const {data} = await memberGetApi.memberGet(id);
-    const memberData = data.result[0];
+    const memberData = data.result.find(e => e.cardId == id);
+    // console.log(user);
+    // const memberData = data.result[0];
     memberData && navigation.navigate('mdetail', memberData);
   };
 
@@ -47,7 +49,7 @@ const Member = ({navigation}) => {
         <DetailNavigator />
       ) : ( */}
       <View style={tw` justify-center items-center h-[620px]`}>
-        <View style={tw` relative w-[430px] h-[430px]`}>
+        {/* <View style={tw` relative w-[430px] h-[430px]`}>
           {ani && (
             <LottieView
               source={require('../assets/animations/nfc.json')}
@@ -67,7 +69,6 @@ const Member = ({navigation}) => {
               left: '50%',
               transform: [{translateX: -64}, {translateY: -64}],
             }}>
-            {/* <View style={tw`absolute top-0 right-0 left-0`}> */}
             <Scan
               color="#52a950"
               ani={ani}
@@ -75,6 +76,12 @@ const Member = ({navigation}) => {
               onPress={pressHandler}
             />
           </View>
+        </View> */}
+        <View
+          style={tw`bg-gray-100/10 border-2 border-gray-500 rounded-[10px]`}>
+          <Text style={tw`text-[2rem] py-10 text-gray-500 px-10`}>
+            Coming Soon ....{' '}
+          </Text>
         </View>
       </View>
       {/* )} */}

@@ -20,12 +20,13 @@ const ModalAlert = ({visible, onClose, setShowAlert, onOk, text}) => {
             <Text style={tw`text-xl text-gray-700`}>{text}</Text>
           </View> */}
 
-          <View style={tw`flex flex-row gap-5 items-center`}>
+          <View style={tw`flex flex-row gap-5c items-center`}>
+            {/* <Text style={`absolute text-white`}>Coming Soon</Text> */}
             <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('memberCreate'), setShowAlert(false);
-              }}
-              style={tw`p-2 w-[190px] h-[190px] rounded-lg flex items-center justify-center py-4 border-2 border-[#52a950] bg-[#52a95020]`}>
+              // onPress={() => {
+              //   navigation.navigate('memberCreate'), setShowAlert(false);
+              // }}
+              style={tw`p-2 opacity-30 w-[190px] h-[190px] rounded-lg flex items-center justify-center py-4 border-2 border-[#52a950] bg-[#52a95020]`}>
               {/* <Text style={tw`text-white  text-center text-gray-600  text-lg`}> 
                 Cancel
               </Text> */}

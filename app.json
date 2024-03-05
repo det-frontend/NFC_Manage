@@ -1,4 +1,11 @@
 {
   "name": "NFC_manage",
-  "displayName": "NFC_manage"
+  "displayName": "NFC_manage",
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "ef6847f8-f566-4845-8a88-3ace5ff17251"
+      }
+    }
+  }
 }

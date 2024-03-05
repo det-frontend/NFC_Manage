@@ -5,9 +5,9 @@ import Scan from '../components/Scan';
 import tw from 'twrnc';
 import LottieView from 'lottie-react-native';
 import NfcManager, {NfcTech} from 'react-native-nfc-manager';
-import StaffGetApi from '../api/StaffGet';
+import memberGetApi from '../api/memberGet';
 
-const Staff = ({navigation}) => {
+const staff = ({navigation}) => {
   const [ani, setAni] = useState(false);
 
   const pressHandler = () => {
@@ -17,13 +17,12 @@ const Staff = ({navigation}) => {
     ani ? readNfc() : NfcManager.cancelTechnologyRequest();
   }, [ani]);
 
-  const getStaff = async id => {
-    const {data} = await StaffGetApi.StaffGet(id);
-    console.log('====================================');
-    console.log(data);
-    console.log('====================================');
-    const StaffData = data.result[0];
-    StaffData && navigation.navigate('sdetail', StaffData);
+  const getMember = async id => {
+    const {data} = await memberGetApi.memberGet(id);
+    const staffData = data.result.find(e => e.cardId == id);
+    console.log(staffData);
+    // const staffData = data.result[0];
+    staffData && navigation.navigate('sdetail', staffData);
   };
 
   const readNfc = async () => {
@@ -34,7 +33,7 @@ const Staff = ({navigation}) => {
       const tag = await NfcManager.getTag();
       console.log('Tag found', tag);
       setAni(false);
-      getStaff(tag.id);
+      getMember(tag.id);
     } catch (ex) {
       console.log('Oops!', ex);
     } finally {
@@ -46,7 +45,7 @@ const Staff = ({navigation}) => {
   return (
     <Screen>
       {/* {isDetail ? (
-        // <StaffDetail setIsDetail={setIsDetail} />
+        // <MemberDetail setIsDetail={setIsDetail} />
         <DetailNavigator />
       ) : ( */}
       <View style={tw` justify-center items-center h-[620px]`}>
@@ -85,4 +84,4 @@ const Staff = ({navigation}) => {
   );
 };
 
-export default Staff;
+export default staff;

@@ -54,7 +54,7 @@ const Success = ({route, navigation}) => {
     ),
   };
   console.log(route.params);
-  const {car_no, name, nfc_id, points, vehicle_type} = route.params;
+  const {car_no, name, cardId, points, vehicle_type} = route.params;
 
   return (
     <>
@@ -79,7 +79,7 @@ const Success = ({route, navigation}) => {
             </Text>
           </View>
           <View style={tw`flex gap-4   w-[70%]  `}>
-            <Text style={tw`text-xl text-gray-700 `}>{nfc_id}</Text>
+            <Text style={tw`text-xl text-gray-700 `}>{cardId}</Text>
             <Text style={tw`text-xl text-gray-700 `}>{name}</Text>
             <Text style={tw`text-xl text-gray-700 `}>{vehicle_type}</Text>
             <Text style={tw`text-xl text-gray-700 `}>{car_no}</Text>

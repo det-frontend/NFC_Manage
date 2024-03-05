@@ -1,5 +1,5 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Member from '../screens/Member';
 import Staff from '../screens/Staff';
@@ -10,8 +10,11 @@ import CreateBtn from '../components/CreateBtn';
 import {useFocusEffect} from '@react-navigation/native';
 import DetailNavigator from './DetailNavigator';
 import SDetailNavigator from './SDetailNavigator';
+import authStorage from '../auth/storage';
+import AuthContext from '../auth/context';
 
 const HomeNavigator = () => {
+  const authContext = useContext(AuthContext);
   const [showAlert, setShowAlert] = useState(false);
   useFocusEffect(
     React.useCallback(() => {
@@ -21,6 +24,12 @@ const HomeNavigator = () => {
       // You might need to replace 'home' with the correct screen name
     }, []),
   );
+
+  const logoutHadler = () => {
+    authContext.setUser('');
+    authStorage.removeToken();
+  };
+
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
@@ -36,6 +45,9 @@ const HomeNavigator = () => {
           borderRadius: 15,
           height: 90,
         },
+        tabStyle: {
+          width: 'auto',
+        },
         tabBarShowLabel: false,
         // tabBarStyle: {backgroundColor: '#2d3038', height: 85},
         tabBarActiveTintColor: color.activeColor,
@@ -46,15 +58,35 @@ const HomeNavigator = () => {
         },
       }}>
       <Tab.Screen
+        name="Member Card"
+        component={DetailNavigator}
         options={{
-          title: 'Member Card Management',
           headerStyle: {
             backgroundColor: color.tabBg,
             height: 70,
             elevation: 0,
           },
+          headerRight: () => (
+            <View
+              style={tw`mb-7 gap-6 mt-5 mr-2 flex flex-row
+                  justify-center items-center`}>
+              <TouchableOpacity onPress={logoutHadler}>
+                <View
+                  style={tw`bg-[#eeee] flex p-1 mr-2  flex-row rounded-[200px] items-center justify-center`}>
+                  <Image
+                    source={require('../assets/logout.png')}
+                    resizeMode="contain"
+                    style={{
+                      height: 35,
+                      width: 35,
+                    }}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+          ),
 
-          headerTitleAlign: 'center',
+          headerTitleAlign: 'left',
           headerTintColor: color.activeColor,
           headerTitleStyle: {
             letterSpacing: 2,
@@ -82,8 +114,6 @@ const HomeNavigator = () => {
             </View>
           ),
         }}
-        name="member"
-        component={DetailNavigator}
       />
       <Tab.Screen
         options={{
@@ -108,14 +138,32 @@ const HomeNavigator = () => {
       />
       <Tab.Screen
         options={{
-          title: 'Staff Card Management',
+          title: 'Staff Card',
           headerStyle: {
             backgroundColor: color.tabBg,
             height: 70,
             elevation: 0,
           },
-
-          headerTitleAlign: 'center',
+          headerRight: () => (
+            <View
+              style={tw`mb-7 gap-6 mt-5 mr-2 flex flex-row
+                  justify-center items-center`}>
+              <TouchableOpacity onPress={logoutHadler}>
+                <View
+                  style={tw`bg-[#eeee] flex p-1 mr-2  flex-row rounded-[200px] items-center justify-center`}>
+                  <Image
+                    source={require('../assets/logout.png')}
+                    resizeMode="contain"
+                    style={{
+                      height: 35,
+                      width: 35,
+                    }}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+          ),
+          headerTitleAlign: 'left',
           headerTintColor: color.blue,
           headerTitleStyle: {
             letterSpacing: 2,
